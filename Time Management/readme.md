@@ -3,6 +3,13 @@
 ## Background
 Time tracking is the foundation of all other Quantified Self analytics.
 
+## Date Table
+The Date Table is located [here](https://github.com/benjaminblackswan/quantified-self/blob/main/Time%20Management/DateTable.md).
+
+## Time Tracking Data generation, recording and storage
+
+
+### Storage
 Time tracking data is exported from excel to SQL Server at the end of each year.
 
 ```
@@ -13,6 +20,20 @@ Schema: productivity
 Table names: timetrackingYYYY
 
 <img width="372" height="82" alt="image" src="https://github.com/user-attachments/assets/788ee3d3-23a1-4470-8a63-94164e5c2a6a" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
