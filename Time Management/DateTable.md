@@ -49,7 +49,7 @@ GO
 
 
 
-### Calendar year, months and days
+### Useful scripts
 
 Calendar year, months and days can be extracted from the *datevalue* column.
 ```
@@ -59,4 +59,15 @@ SELECT
     DATENAME(MONTH, datevalue) AS MonthName,
     DAY(datevalue) AS Day
 FROM datetable;
+```
+
+
+
+To find Epic years with 53 weeks
+```
+SELECT
+    Year
+FROM DateTable
+WHERE WeekNum = 53
+GROUP BY Year;
 ```
