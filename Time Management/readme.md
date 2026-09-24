@@ -15,48 +15,7 @@ Table names: timetrackingYYYY
 <img width="372" height="82" alt="image" src="https://github.com/user-attachments/assets/788ee3d3-23a1-4470-8a63-94164e5c2a6a" />
 
 
-## DateTable
 
-Date Table is stored as dbo.datetable.
-
-<img width="416" height="343" alt="image" src="https://github.com/user-attachments/assets/fc3c9360-f653-4019-af5d-499c76f45434" />
-
-
-**DayID** :Primary Key that identifies the day.  
-**DateValue** : is the date in the format of YYYY-MM-DD.  
-**ExcelDateNum** : The value of the date in Excel's numeric format.  
-**DaysSinceBirth** : Number of days since birthday. With birthday being 0  
-**EpYearID** : Number of Epic Year since birth year with birth year being 1.  
-**EpYear** : Epic Year is a way of demarcating years based on blocks of weeks (either 52 weeks or 53 weeks) instead of days. See how to get CalenderYear below.  
-**EpYearDayNum** : Number of days since the beginning of an Epic Year, with the first day of an Epic Year being 1.  
-**QuarterID** : Number of Quarters since birthday.  
-**EpYearQuarterNum** : Number of quarters since the beginning of an Epic Year.  
-**QuarterDayNum** : Number of days since the beginning of a quarter, with the first day of a quarter being 1.  
-**FortnightID** : Number of Quarters since birthday.  
-**FortnightDayNum** : Number of days since the beginning of a quarter, with the first day of a quarter being 1.  
-**WeekID** : Number of Quarters since birthday.  
-**EpYearWeekNum** : Number of quarters since the beginning of an Epic Year.  
-**WeekDayNum** : Number of days since the beginning of a quarter, with the first day of a quarter being 1.  
-
-
-#### Calendar year, months and days
-```
-SELECT
-    YEAR(datevalue) AS CalendarYear,
-    MONTH(datevalue) AS MonthNumber,
-    DATENAME(MONTH, datevalue) AS MonthName,
-    DAY(datevalue) AS Day
-FROM datetable;
-```
-
-#### Fortnight
-```
-SELECT
-    format(ceiling(EpYearWeekNum/2.0), '00') as EpYearFortnightNum
-FROM datetable;
-```
-
-note: must divide by 2.0 because EpYearWeekNum is NOT float data type.
 
 ### SQL for loading into Power Query
 ```
