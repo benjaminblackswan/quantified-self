@@ -103,10 +103,9 @@ ORDER BY DayIndex;
 let
     Source = Sql.Database("legion", "Ben", [Query="#(lf)    SELECT #(lf)    DateValue,#(lf)    Year,#(lf)    DayOfYearNum,#(lf)    MONTH(DateValue) AS MonthNum,#(lf)    DATENAME(MONTH, DateValue) AS MonthName,#(lf)    WeekNum,#(lf)    CONCAT('Week ', WeekNum) AS WeekNum_Text,#(lf)    FORMAT(DateValue, 'ddd') AS Weekday_Text,#(lf)    FortnightNum,#(lf)    'Fortnight ' + CAST(FortnightNum AS varchar(2)) AS Fortnight_Text,#(lf)    RIGHT(CAST(YEAR(DateValue) AS varchar(4)), 2)#(lf)        + 'F'#(lf)        + RIGHT('00' + CAST(FortnightNum AS varchar(2)), 2) AS Fortnight_Label#(lf)FROM DateTable#(lf)WHERE Year BETWEEN 2021 AND 2026#(lf)ORDER BY DayIndex;#(lf)"]),
     #"Renamed Columns" = Table.RenameColumns(Source,{{"DateValue", "Date"}}),
-    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Year", Int64.Type}, {"DayOfYearNum", Int64.Type}, {"WeekNum", Int64.Type}, {"FortnightNum", Int64.Type}, {"Date", type date}}),
-    #"Added Target Line" = Table.AddColumn(#"Changed Type", "StrengthTrainingTarget", each [DayOfYearNum] * 0.5)
+    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Year", Int64.Type}, {"DayOfYearNum", Int64.Type}, {"WeekNum", Int64.Type}, {"FortnightNum", Int64.Type}, {"Date", type date}})
 in
-    #"Added Target Line"
+    #"Changed Type"
 ```
 
 
