@@ -75,16 +75,25 @@ GROUP BY Year;
 
 
 
-## Loading into Power Query M
-
+## SQL for loading into Power Query
 ```
-let
-    Source = Sql.Database("legion", "Ben", [Query="select DateValue#(lf), Year#(lf), DayOfYearNum#(lf), MONTH(datevalue) AS MonthNum#(lf), DATENAME(MONTH, datevalue) AS MonthName#(lf), WeekNum#(lf), concat('Week ', WeekNum) as WeekNum_Text#(lf), format(datevalue, 'ddd') AS Weekday_Text#(lf), FortnightNum#(lf), 'Fortnight ' + CAST(FortnightNum AS varchar(2)) AS Fortnight_text#(lf)from DateTable#(lf)where Year between 2021 and 2026#(lf)order by DayIndex;"]),
-    #"Added Target Line" = Table.AddColumn(Source, "Target", each [DayOfYearNum] * 0.5),
-    #"Sorted Rows" = Table.Sort(#"Added Target Line",{{"DateValue", Order.Ascending}}),
-    #"Changed Type" = Table.TransformColumnTypes(#"Sorted Rows",{{"Year", Int64.Type}, {"DayOfYearNum", Int64.Type}, {"WeekNum", Int64.Type}, {"FortnightNum", Int64.Type}, {"Gaming Target", type number}, {"DateValue", type date}})
-in
-    #"Changed Type"
+SELECT 
+    DateValue,
+    Year,
+    DayOfYearNum,
+    MONTH(DateValue) AS MonthNum,
+    DATENAME(MONTH, DateValue) AS MonthName,
+    WeekNum,
+    CONCAT('Week ', WeekNum) AS WeekNum_Text,
+    FORMAT(DateValue, 'ddd') AS Weekday_Text,
+    FortnightNum,
+    'Fortnight ' + CAST(FortnightNum AS varchar(2)) AS Fortnight_Text,
+    RIGHT(CAST(YEAR(DateValue) AS varchar(4)), 2)
+        + 'F'
+        + RIGHT('00' + CAST(FortnightNum AS varchar(2)), 2) AS Fortnight_Label
+FROM DateTable
+WHERE Year BETWEEN 2021 AND 2026
+ORDER BY DayIndex;
 ```
 
 
